@@ -1,4 +1,6 @@
+"use strict";
 /** Textual markov chain generator */
+
 
 
 class MarkovMachine {
@@ -6,8 +8,9 @@ class MarkovMachine {
   /** build markov machine; read in text.*/
 
   constructor(text) {
-    let words = text.split(/[ \r\n]+/);
+    this.words = text.split(/[ \r\n]+/);
     // MORE CODE HERE
+    // this.words = this.words.bind(this)
   }
 
   /** set markov chains:
@@ -16,13 +19,30 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains() {
-    // MORE CODE HERE
+    
+    let chains = new Map();
+
+    for (let i = 0; i < this.words.length; i++) {
+
+      if (!chains.has(this.words[i])) {
+        chains.set(this.words[i], []);
+      }
+
+      let nextWord = this.words[i + 1] || null;
+      let currWord = chains.get(this.words[i]);
+      currWord.push(nextWord);
+    }
+    console.log("chains:", chains);
+  }
+
+    /** return random text from chains */
+
+    getText(numWords = 100) {
+      return
+    }
   }
 
 
-  /** return random text from chains */
+let markovMachine = new MarkovMachine("the cat in the hat")
+markovMachine.makeChains()
 
-  getText(numWords = 100) {
-    // MORE CODE HERE
-  }
-}
